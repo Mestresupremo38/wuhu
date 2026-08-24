@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JOVI - Precision Camera</title>
+
+    <!-- API EXTERNO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS EXTERNO -->
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="app-wrapper">
+    <!-- App Container -->
+    <main class="app-container" id="camera-app">
+        <!-- Viewfinder Layer -->
+        <div class="viewfinder-layer">
+            <div class="grid-pattern"></div>
+
+            <!-- Mais Conteúdo de Modos (Substituir Imagem) -->
+            <div class="more-viewfinder-grid">
+                <div class="modes-grid">
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">aperture</span></div>
+                        <span class="mode-label">PRO</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">panorama</span></div>
+                        <span class="mode-label">PANORAMA</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">slow_motion_video</span>
+                        </div>
+                        <span class="mode-label">CÂMERA LENTA</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">timelapse</span></div>
+                        <span class="mode-label">TIME-LAPSE</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">nights_stay</span></div>
+                        <span class="mode-label">NOITE+</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">document_scanner</span>
+                        </div>
+                        <span class="mode-label">DOCUMENTO</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">flare</span></div>
+                        <span class="mode-label">ASTRO</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">camera_enhance</span>
+                        </div>
+                        <span class="mode-label">PROFISSIONAL</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">edit</span></div>
+                        <span class="mode-label">INSTANTÂNEO</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">restaurant</span></div>
+                        <span class="mode-label">COMIDA</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">split_screen</span></div>
+                        <span class="mode-label">VISUALIZAÇÃO DUPLA</span>
+                    </div>
+                    <div class="mode-option">
+                        <div class="mode-icon-wrapper"><span class="material-symbols-outlined">motion_photos_on</span>
+                        </div>
+                        <span class="mode-label">FOTO EM MOVIMENTO</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scanline" aria-hidden="true"></div>
+            <div class="viewfinder-overlay" aria-hidden="true"></div>
+        </div>
+
+        <!-- Navegação superior -->
+        <header>
+            <div class="header-group">
+                <button class="icon-btn" aria-label="Settings">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <button class="icon-btn primary" aria-label="Flash">
+                    <span class="material-symbols-outlined">flash_on</span>
+                </button>
+            </div>
+            <div class="header-group">
+                <button class="status-badge" aria-label="HDR settings">
+                    <span class="badge-text-hdr">HDR</span>
+                </button>
+                <button class="status-badge" aria-label="Resolution and framerate">
+                    <div class="badge-resolution">
+                        <span class="res-main">4K</span>
+                        <span class="res-sub">60</span>
+                    </div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Seletor de modo -->
+        <nav class="mode-picker" aria-label="Camera Modes">
+            <div class="mode-list">
+                <button class="mode-item" onclick="location.href='index.html'">Night</button>
+                <button class="mode-item" onclick="location.href='index.html'">Portrait</button>
+                <button class="mode-item" onclick="location.href='index.html'">Photo</button>
+                <button class="mode-item" onclick="location.href='index.html'">Video</button>
+                <button class="mode-item active">Mais</button>
+            </div>
+        </nav>
+
+        <!-- Navegação inferior -->
+        <footer>
+            <!-- Galeria -->
+            <button class="gallery-btn" aria-label="Open Gallery">
+                <img alt="Recent photo preview" class="gallery-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpC9d-YwgJ0lAejhlXgTthoc5QEyDi7DZEB_LI-Qfm7uFvT3vTQYQ7cHrRtKvHgORJ71IUYKLa_wbG6GUmYjIvMKNzUepeg_VbrX6fgmTd9Zo6Y_1JCKGMl97BWnW544jIJsKUl18xlO7AfIS_1hSfkveuhnlGuXoSWEjFDKQQChlsVQeMM5-J8JFfNWC0dYpw1MMf7IBYTbHvZOSjW0GHyRav25Zwxkp10ZXLD-zPpXGV2AKqL4Yyqzr_m6TqBAGfJzaKOQGfmM4">
+            </button>
+
+            <!-- Shutter -->
+            <div class="shutter-container" style="opacity: 0; pointer-events: none;">
+                <div class="shutter-glow" aria-hidden="true"></div>
+                <button class="shutter-btn" aria-label="Take photo">
+                    <div class="shutter-inner">
+                        <div class="shutter-core"></div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Câmera Flip e IA -->
+            <div class="flip-wrapper">
+                <button class="flip-btn" aria-label="Switch camera">
+                    <span class="material-symbols-outlined">flip_camera_ios</span>
+                </button>
+                <button class="ai-btn" aria-label="AI Mode">AI</button>
+            </div>
+        </footer>
+
+
+    </main>
+
+    <script src="src/js/script.js"></script>
+    <script>
+        // Certifique-se de que “Mais” fique centralizado ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeMode = document.querySelector('.mode-item.active');
+            if (activeMode) activeMode.scrollIntoView({ inline: 'center' });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JOVI - Precision Camera</title>
+
+    <!-- API EXTERNO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS EXTERNO -->
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="app-wrapper">
+    <!-- App Container -->
+    <main class="app-container" id="camera-app">
+        <!-- Viewfinder Layer -->
+        <div class="viewfinder-layer">
+            <img id="camera-view" src="src/assets/imagem1.png" alt="Camera view" class="camera-view">
+            <div class="scanline" aria-hidden="true"></div>
+            <div class="viewfinder-overlay" aria-hidden="true"></div>
+        </div>
+
+        <!-- Navegação superior -->
+        <header>
+            <div class="header-group">
+                <button class="icon-btn" aria-label="Settings">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <button class="icon-btn primary" aria-label="Flash">
+                    <span class="material-symbols-outlined">flash_on</span>
+                </button>
+            </div>
+
+            <div class="header-group">
+                <button class="status-badge" aria-label="HDR settings">
+                    <span class="badge-text-hdr">HDR</span>
+                </button>
+                <button class="status-badge" aria-label="Resolution and framerate">
+                    <div class="badge-resolution">
+                        <span class="res-main">4K</span>
+                        <span class="res-sub">60</span>
+                    </div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Seletor de modo -->
+        <nav class="mode-picker" aria-label="Camera Modes">
+            <div class="mode-list">
+                <button class="mode-item">Night</button>
+                <button class="mode-item">Portrait</button>
+                <button class="mode-item active">Photo</button>
+                <button class="mode-item">Video</button>
+                <button class="mode-item">Mais</button>
+            </div>
+        </nav>
+
+         <!-- Navegação inferior -->
+        <footer>
+            <!-- Galeria -->
+            <button class="gallery-btn" aria-label="Open Gallery">
+                <img alt="Recent photo preview" class="gallery-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpC9d-YwgJ0lAejhlXgTthoc5QEyDi7DZEB_LI-Qfm7uFvT3vTQYQ7cHrRtKvHgORJ71IUYKLa_wbG6GUmYjIvMKNzUepeg_VbrX6fgmTd9Zo6Y_1JCKGMl97BWnW544jIJsKUl18xlO7AfIS_1hSfkveuhnlGuXoSWEjFDKQQChlsVQeMM5-J8JFfNWC0dYpw1MMf7IBYTbHvZOSjW0GHyRav25Zwxkp10ZXLD-zPpXGV2AKqL4Yyqzr_m6TqBAGfJzaKOQGfmM4">
+            </button>
+
+            <!-- Shutter -->
+            <div class="shutter-container">
+                <div class="shutter-glow" aria-hidden="true"></div>
+                <button class="shutter-btn" aria-label="Take photo">
+                    <div class="shutter-inner">
+                        <div class="shutter-core"></div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Câmera Flip e IA -->
+            <div class="flip-wrapper">
+                <button class="flip-btn" aria-label="Switch camera">
+                    <span class="material-symbols-outlined">flip_camera_ios</span>
+                </button>
+                <button class="ai-btn" aria-label="AI Mode">AI</button>
+            </div>
+        </footer>
+
+        <!-- Sobreposição de chat com IA -->
+        <section class="ai-overlay" id="ai-overlay">
+            <div class="ai-panel">
+                <!-- Header -->
+                <div class="ai-header">
+                    <div class="ai-header-left">
+                        <button class="ai-back-btn" id="ai-back" aria-label="Voltar" style="display: none;">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                        </button>
+                        <span class="ai-logo" id="ai-logo-header">AI</span>
+                        <span class="ai-title">JOVI AI</span>
+                    </div>
+                    <button class="ai-close-btn" id="ai-close" aria-label="Close AI">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+
+                <!-- Menu de Opções da IA -->
+                <div class="ai-menu-view" id="ai-menu-view">
+                    <h2 class="ai-menu-title">Selecione uma opção</h2>
+                    <div class="ai-menu-options">
+                        <button class="ai-menu-btn" id="btn-duvidas">
+                            <span class="material-symbols-outlined menu-icon">chat</span>
+                            <div class="menu-btn-content">
+                                <span class="menu-btn-title">Dúvidas (chatbot)</span>
+                                <span class="menu-btn-desc">Converse com o assistente inteligente</span>
+                            </div>
+                            <span class="material-symbols-outlined arrow-icon">chevron_right</span>
+                        </button>
+                        <button class="ai-menu-btn" id="btn-guiado">
+                            <span class="material-symbols-outlined menu-icon">explore</span>
+                            <div class="menu-btn-content">
+                                <span class="menu-btn-title">Modo guiado</span>
+                                <span class="menu-btn-desc">Instruções passo a passo para fotos</span>
+                            </div>
+                            <span class="material-symbols-outlined arrow-icon">chevron_right</span>
+                        </button>
+                        <button class="ai-menu-btn" id="btn-automatico">
+                            <span class="material-symbols-outlined menu-icon">auto_awesome</span>
+                            <div class="menu-btn-content">
+                                <span class="menu-btn-title">Modo automático</span>
+                                <span class="menu-btn-desc">Otimização inteligente da cena</span>
+                            </div>
+                            <span class="material-symbols-outlined arrow-icon">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tela do Chatbot -->
+                <div class="ai-chat-view" id="ai-chat-view">
+                    <!-- Mensagens -->
+                    <div class="ai-messages" id="ai-messages">
+                        <div class="ai-msg ai-msg-bot">
+                            <div class="ai-avatar">AI</div>
+                            <div class="ai-bubble">Olá! Sou a JOVI AI. Como posso ajudar com sua foto?</div>
+                        </div>
+                    </div>
+
+                    <!-- Entrada -->
+                    <div class="ai-input-area">
+                        <input type="text" class="ai-input" id="ai-input" placeholder="Pergunte à IA..." />
+                        <button class="ai-send-btn" id="ai-send" aria-label="Send message">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modo Guiado -->
+                <div class="ai-guided-view" id="ai-guided-view" style="display: none;">
+                    
+                    <!-- Passo 1: Digitar Objetivo -->
+                    <div class="guided-step" id="guided-step-1">
+                        <h2 class="ai-guided-title">O que você deseja fotografar?</h2>
+                        <p class="ai-guided-subtitle">Descreva o seu objetivo em poucas palavras para receber instruções personalizadas da IA.</p>
+                        
+                        <div class="guided-input-box">
+                            <textarea class="guided-textarea" id="guided-input" placeholder="Ex: Uma foto de um prato de macarrão na mesa, ou uma selfie com meus amigos na praia..."></textarea>
+                            <button class="action-btn primary" id="btn-next-guided">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Passo 2: Permissão e Escaneamento -->
+                    <div class="guided-step" id="guided-step-2" style="display: none;">
+                        <h2 class="ai-guided-title">Análise de Ambiente</h2>
+                        <div class="scan-permission-box" id="scan-permission-box">
+                            <span class="material-symbols-outlined scan-icon-large">photo_camera_back</span>
+                            <p class="ai-guided-text">
+                                A JOVI AI precisa analisar as condições de iluminação e distância para criar o plano perfeito.
+                            </p>
+                            <button class="action-btn primary" id="btn-start-scan">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Permitir Escaneamento
+                            </button>
+                        </div>
+
+                        <!-- Estado de Carregamento/Escaneamento -->
+                        <div class="scanning-status-box" id="scanning-status-box" style="display: none;">
+                            <div class="spinner-glow"></div>
+                            <p class="scan-status-text" id="scan-status-text">Iniciando câmera...</p>
+                            <div class="scan-progress-bar">
+                                <div class="scan-progress-fill" id="scan-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3: Passo a Passo de Configuração -->
+                    <div class="guided-step" id="guided-step-3" style="display: none;">
+                        <h2 class="ai-guided-title">Como Configurar a Câmera</h2>
+                        <p class="ai-guided-subtitle">Siga este passo a passo para preparar o seu disparo:</p>
+
+                        <div class="plan-steps-container" id="plan-steps-container">
+                            <!-- Inserido dinamicamente via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modo Automático -->
+                <div class="ai-auto-view" id="ai-auto-view" style="display: none;">
+                    
+                    <!-- Passo 1: Digitar Objetivo -->
+                    <div class="auto-step" id="auto-step-1">
+                        <h2 class="ai-auto-title">O que deseja fotografar?</h2>
+                        <p class="ai-auto-subtitle">Descreva em poucas palavras para que a IA otimize a câmera automaticamente.</p>
+                        
+                        <div class="auto-input-box">
+                            <textarea class="auto-textarea" id="auto-input" placeholder="Ex: Foto de uma flor com fundo desfocado, ou grupo de pessoas sob pouca luz..."></textarea>
+                            <button class="action-btn primary" id="btn-next-auto">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Passo 2: Permissão e Escaneamento -->
+                    <div class="auto-step" id="auto-step-2" style="display: none;">
+                        <h2 class="ai-auto-title">Análise de Ambiente</h2>
+                        <div class="scan-permission-box" id="auto-scan-permission-box">
+                            <span class="material-symbols-outlined scan-icon-large">blur_on</span>
+                            <p class="ai-auto-text">
+                                A JOVI AI analisará o ambiente e aplicará as melhores configurações automaticamente.
+                            </p>
+                            <button class="action-btn primary" id="btn-start-auto-scan">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                Permitir e Otimizar
+                            </button>
+                        </div>
+
+                        <!-- Estado de Carregamento/Escaneamento -->
+                        <div class="scanning-status-box" id="auto-scanning-status-box" style="display: none;">
+                            <div class="spinner-glow"></div>
+                            <p class="scan-status-text" id="auto-scan-status-text">Iniciando câmera...</p>
+                            <div class="scan-progress-bar">
+                                <div class="scan-progress-fill" id="auto-scan-progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3: Implementação das Configurações -->
+                    <div class="auto-step" id="auto-step-3" style="display: none;">
+                        <h2 class="ai-auto-title">Otimização Inteligente</h2>
+                        <p class="ai-auto-subtitle">Parâmetros que a IA está aplicando no dispositivo:</p>
+
+                        <div class="plan-steps-container" id="auto-config-list">
+                            <!-- Inserido dinamicamente via JS -->
+                        </div>
+
+                        <!-- Status da Implementação -->
+                        <div class="impl-status-box">
+                            <div class="impl-loading" id="impl-loading-indicator">
+                                <div class="mini-spinner"></div>
+                                <span>Configurando câmera...</span>
+                            </div>
+                            <div class="impl-success" id="impl-success-indicator" style="display: none;">
+                                <span class="material-symbols-outlined success-icon">verified</span>
+                                <span>Configurações aplicadas com sucesso!</span>
+                            </div>
+                        </div>
+
+                        <!-- Botão de Fechar -->
+                        <button class="action-btn primary" id="btn-finish-auto" style="display: none; margin-top: 1rem;">
+                            <span class="material-symbols-outlined">photo_camera</span>
+                            Capturar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobreposição da Galeria -->
+        <section class="gallery-overlay" id="gallery-overlay">
+            <div class="gallery-panel">
+                <!-- Header -->
+                <div class="gallery-header">
+                    <button class="gallery-close-btn" id="gallery-close" aria-label="Voltar para Câmera">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <span class="gallery-title">Galeria</span>
+                    <div style="width: 2rem;"></div> <!-- Espaçador para centralizar título -->
+                </div>
+
+                <!-- Foto em Exibição -->
+                <div class="gallery-content">
+                    <img id="gallery-photo" class="gallery-large-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkpC9d-YwgJ0lAejhlXgTthoc5QEyDi7DZEB_LI-Qfm7uFvT3vTQYQ7cHrRtKvHgORJ71IUYKLa_wbG6GUmYjIvMKNzUepeg_VbrX6fgmTd9Zo6Y_1JCKGMl97BWnW544jIJsKUl18xlO7AfIS_1hSfkveuhnlGuXoSWEjFDKQQChlsVQeMM5-J8JFfNWC0dYpw1MMf7IBYTbHvZOSjW0GHyRav25Zwxkp10ZXLD-zPpXGV2AKqL4Yyqzr_m6TqBAGfJzaKOQGfmM4"
+                        alt="Photo preview">
+                </div>
+
+                <!-- Footer com Botão IA -->
+                <div class="gallery-footer">
+                    <button class="action-btn primary" id="btn-gallery-ai">
+                        <span class="material-symbols-outlined">auto_awesome</span>
+                        Sugestões IA
+                    </button>
+                </div>
+
+                <!-- Painel de Sugestões da IA (Bottom Sheet) -->
+                <div class="gallery-ai-sheet" id="gallery-ai-sheet">
+                    <div class="sheet-drag-handle"></div>
+                    <div class="sheet-header">
+                        <span class="material-symbols-outlined sheet-icon">auto_awesome</span>
+                        <span class="sheet-title">JOVI AI - Análise de Foto</span>
+                        <button class="sheet-close-btn" id="gallery-ai-sheet-close">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="sheet-body">
+                        <div class="suggestion-group">
+                            <div class="suggestion-header">
+                                <span class="material-symbols-outlined text-primary">lightbulb</span>
+                                <strong>Iluminação</strong>
+                            </div>
+                            <p class="suggestion-text">
+                                A luz de fundo está um pouco estourada. Na próxima captura, tente posicionar o assunto a favor da luz ou ative o modo HDR para equilibrar as sombras.
+                            </p>
+                        </div>
+                        <div class="suggestion-group">
+                            <div class="suggestion-header">
+                                <span class="material-symbols-outlined text-primary">grid_on</span>
+                                <strong>Composição</strong>
+                            </div>
+                            <p class="suggestion-text">
+                                O objeto centralizado ficou ótimo, mas enquadrá-lo utilizando a regra dos terços (na interseção da direita) traria uma profundidade mais artística.
+                            </p>
+                        </div>
+                        <div class="suggestion-group">
+                            <div class="suggestion-header">
+                                <span class="material-symbols-outlined text-primary">psychology</span>
+                                <strong>Dica do Jovi AI</strong>
+                            </div>
+                            <p class="suggestion-text">
+                                Experimente dar um toque longo na tela para travar o foco e a exposição (Bloqueio AE/AF) antes de disparar. Isso evitará desfoques acidentais em caso de movimento.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JS EXTERNO -->
+    <script src="src/js/script.js"></script>
+</body>
+
+</html>
